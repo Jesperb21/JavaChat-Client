@@ -1,0 +1,3 @@
+# JavaChat-Client
+a random Java based Chat Client made for "Java 3" 
+it utilizes JavaFX ( fxml ) to build a gui...
