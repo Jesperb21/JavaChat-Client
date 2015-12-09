@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox minWidth="500" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
+   <children>
+     <MenuBar VBox.vgrow="NEVER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+             <items>
+               <MenuItem mnemonicParsing="false" onAction="#addChannel" text="Add Channel" />
+               <MenuItem mnemonicParsing="false" onAction="#closeChannel" text="Close Channel" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+               <MenuItem mnemonicParsing="false" onAction="#openPreferences" text="Preferences…" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+               <MenuItem mnemonicParsing="false" onAction="#closeServer" text="Quit" />
+             </items>
+          </Menu>
+        </menus>
+     </MenuBar>
+     <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <items>
+          <AnchorPane minWidth="200" prefWidth="225.0">
+             <children>
+               <VBox prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Label style="-fx-font-size: 20px; -fx-padding: 10" text="Active chatrooms" />
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="1">
+                           <content>
+                          <fx:include fx:id="chatList" source="CustomControls/ChatPanel.fxml" />
+                           </content>
+                        </ScrollPane>
+                  </children>
+               </VBox>
+             </children>
+          </AnchorPane>
+          <AnchorPane minWidth="300" prefWidth="446.0">
+             <children>
+                <fx:include source="CustomControls/ChatArea.fxml"
+                            AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0"
+                            AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0" />
+             </children>
+          </AnchorPane>
+        </items>
+     </SplitPane>
+   </children>
+</VBox>
