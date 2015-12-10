@@ -12,8 +12,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -25,8 +27,11 @@ import java.util.logging.SimpleFormatter;
 public class PrefController implements Initializable{
 
     public TextField txtPort;
+    public TextField txtIPAddress;
 
     public int Port = 0;
+    public String IPAddress = "127.0.0.1";
+
     public String FilePath = System.getProperty("user.dir");
 
     /*
@@ -71,6 +76,28 @@ public class PrefController implements Initializable{
     private void getPortFromXml(){
         XMLHandler xmlHandler = new XMLHandler();
         Port = xmlHandler.readPortFromXML();
+    }
+
+    public void Connect() {
+        Port = Integer.parseInt(txtPort.getText());
+        IPAddress = txtIPAddress.getText();
+
+        try {
+            Socket Client = new Socket(IPAddress, Port);
+            OutputStream outToServer = Client.getOutputStream();
+
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF("Hello from" + Client.getLocalSocketAddress());
+
+            InputStream inFromServer = Client.getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
+
+            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(String.valueOf(in) + "\n");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void StartServer() {
