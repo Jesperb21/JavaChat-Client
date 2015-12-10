@@ -92,11 +92,11 @@ public class PrefController implements Initializable{
             InputStream inFromServer = Client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
 
-            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(String.valueOf(in) + "\n");
+            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(in.readUTF() + "\n");
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            System.out.println("Unknown host address..");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Connection timed out..");
         }
     }
 
