@@ -21,9 +21,11 @@ public class PrefController{
 
     public TextField txtPort;
     public TextField txtIPAddress;
+    public TextField txtName;
 
     public int Port = 33000;
     public String IPAddress = "192.168.1.10";
+    public String Name = "Unnamed";
 
     /**
      * Get properties of the prefcontroller
@@ -58,24 +60,20 @@ public class PrefController{
      * Connect to a server
      */
     public void Connect() {
-        if(txtPort.getText() == "" && txtIPAddress.getText() == "") {
+        if(txtPort.getText() == "" || txtIPAddress.getText() == "") {
             Port = Integer.parseInt(txtPort.getText());
             IPAddress = txtIPAddress.getText();
+            Name = txtName.getText();
         }
 
         System.out.println(Port);
         System.out.println(IPAddress);
+        System.out.println(Name);
 
         try {
             Socket Client = new Socket(IPAddress, Port);
             ClientSocketService css = new ClientSocketService(Client);
-            css.TransferPckg(new LoginPackage("Hello", "Default0"));
-
-//            InputStream inFromServer = Client.getInputStream();
-//            DataInputStream in = new DataInputStream(inFromServer);
-
-//            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(in.readUTF() + "\n");
-
+            css.TransferPckg(new LoginPackage(Name, "Default0"));
         } catch (IOException e) {
             System.out.println("Connection timed out..");
         }
