@@ -5,9 +5,11 @@ package Models.Chat.Packages;
  */
 public class LogoutPackage implements IPackageBase{
     private String name;
+    private String RoomName;
 
-    public LogoutPackage(String name) {
+    public LogoutPackage(String name, String RoomName) {
         this.name = name;
+        this.RoomName = RoomName;
     }
 
     @Override
@@ -18,5 +20,7 @@ public class LogoutPackage implements IPackageBase{
     public String getName(){
         return name;
     }
-
+    public String getRoomName(){
+        return RoomName;
+    }
 }

@@ -7,9 +7,11 @@ import java.util.Date;
  */
 public class LoginPackage implements IPackageBase {
     private String Name;
+    private String RoomName;
 
-    public LoginPackage(String name) {
+    public LoginPackage(String name, String RoomName) {
         Name = name;
+        this.RoomName = RoomName;
     }
 
     @Override
@@ -19,4 +21,5 @@ public class LoginPackage implements IPackageBase {
     public String getName(){
         return Name;
     }
+    public String getRoomName() { return RoomName;}
 }

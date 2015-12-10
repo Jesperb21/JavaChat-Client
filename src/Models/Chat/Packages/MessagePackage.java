@@ -7,14 +7,14 @@ import java.util.Date;
  */
 public class MessagePackage implements IPackageBase {
 
-    private String Author;
     private Date Time;
-    private String Msg;
+    private String Author, Msg, RoomName;
 
-    public MessagePackage(String author, Date time, String msg) {
-        Author = author;
+    public MessagePackage(Date time, String author, String msg, String RoomName) {
         Time = time;
+        Author = author;
         Msg = msg;
+        this.RoomName = RoomName;
     }
 
     @Override
@@ -24,11 +24,11 @@ public class MessagePackage implements IPackageBase {
     public String getAuthor(){
         return Author;
     }
-
-
-
     public String getMessage(){
         return Msg;
+    }
+    public String getRoomName(){
+        return RoomName;
     }
     public Date getTime(){
         return Time;

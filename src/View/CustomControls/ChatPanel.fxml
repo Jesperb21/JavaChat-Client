@@ -7,6 +7,5 @@
 <Accordion fx:id="chatList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
            AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Chat.ChatPanelController">
     <panes>
-        <fx:include source="ChatChannel.fxml" />
     </panes>
 </Accordion>

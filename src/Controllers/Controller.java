@@ -2,17 +2,8 @@ package Controllers;
 
 import Controllers.Chat.ChatChannelController;
 import Controllers.Modals.PrefController;
-import Models.Chat.Packages.MessagePackage;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-
-import java.net.URL;
-import java.sql.Date;
-import java.time.Instant;
-import java.util.ResourceBundle;
+import java.util.Random;
 
 public class Controller{
 
@@ -28,13 +19,17 @@ public class Controller{
     //region channels actions
 
     public void addChannel(){
-        mediator.chatPanelController.addChannel();
+        Random random = new Random();
+        byte[] randomBytes = new byte[256];
+        random.nextBytes(randomBytes);
+        mediator.chatPanelController.addChannel(randomBytes.toString());
     }
 
     //todo change it so that each channel has a close button in the ChatPanel, then call closeChannel from there
     public void closeChannel() {
-        ChatChannelController channel = mediator.chatChannelControllers.get(0);
-        mediator.chatPanelController.closeChannel(channel);
+        String name = mediator.chatPanelController.getSelectedChannel();
+        ChatChannelController channel = mediator.channels.get(name);
+        mediator.chatPanelController.closeChannel(name);
     }
 
     //endregion

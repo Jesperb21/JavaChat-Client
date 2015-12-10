@@ -20,12 +20,16 @@ import java.io.File;
  * ...todo look over how jakob wrote ReadXMLFile and storePort
  */
 public class XMLHandler {
-    public void WritePortToXML(Integer Port){
+    public void WritePortToXML(Integer Port) {
         storePort(Port.toString());
     }
-    public int readPortFromXML(){
+
+    public int readPortFromXML() {
         return Integer.parseInt(ReadXMLFile());
     }
+
+    public String FileName = "Properties.xml";
+    public String FilePath = System.getProperty("user.dir");
 
 
     private String ReadXMLFile() {
@@ -33,7 +37,14 @@ public class XMLHandler {
         String test = "";
 
         try {
-            File inputFile = new File("C:\\File.xml");
+            File inputFile = new File(FilePath + "\\" + FileName);
+            if (inputFile.createNewFile()){
+                storePort("34000");
+                System.out.println("File is created!");
+            }else{
+                System.out.println("File already exists.");
+            }
+
             DocumentBuilderFactory dbFactory
                     = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -53,8 +64,9 @@ public class XMLHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return test;
+    return test;
     }
+
     private void storePort(String Port) {
 
         try {
@@ -75,7 +87,7 @@ public class XMLHandler {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("C:\\file.xml"));
+            StreamResult result = new StreamResult(new File(FilePath + "\\" + FileName));
 
             // Output to console for testing
             // StreamResult result = new StreamResult(System.out);

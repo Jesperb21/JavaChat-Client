@@ -1,18 +1,11 @@
 package Services;
 
 import Models.Chat.Packages.IPackageBase;
-import Models.Chat.Packages.MessagePackage;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.file.SecureDirectoryStream;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ClientSocketService implements ISocketService{
     private Socket socket;
@@ -25,8 +18,8 @@ public class ClientSocketService implements ISocketService{
 
     //region socket commands available
     public void SendMsg(String Author, String Msg){
-        MessagePackage msgPckg = new MessagePackage(Author, Date.from(Instant.now()), Msg);
-        TransferPckg(msgPckg);
+        //MessagePackage msgPckg = new MessagePackage(Date.from(Instant.now()), Author, Msg);
+        //TransferPckg(msgPckg);
     }
     //endregion
 
@@ -41,14 +34,13 @@ public class ClientSocketService implements ISocketService{
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             //parse to json
-            JSONParser parser = new JSONParser();
-            String parsedPckg = (String) parser.parse(pckg.toString());
+            Gson g = new Gson();
+            String parsedPckg = g.toJson(pckg);
 
             //write to output stream
             out.writeUTF(parsedPckg);
             out.flush();
-
-        } catch (ParseException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

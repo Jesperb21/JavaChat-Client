@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class RequestUserList implements IPackageBase {
     private ArrayList<String> Users;
+    private String RoomName;
 
     public RequestUserList(ArrayList<String> users) {
         Users = users;
@@ -20,4 +21,5 @@ public class RequestUserList implements IPackageBase {
     public ArrayList<String> getUsers(){
         return Users;
     }
+    public String RoomName(){ return RoomName;}
 }

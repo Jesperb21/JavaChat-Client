@@ -4,10 +4,9 @@
 
 
 <TitledPane animated="false" fx:controller="Controllers.Chat.ChatChannelController"
-            prefWidth="200.0" text="untitled" fx:id="ChatChannelPane"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http:javafx.com/fxml/1">
+                prefWidth="200.0" text="untitled" fx:id="ChatChannelPane"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
-        <ListView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <ListView />
     </AnchorPane>
 </TitledPane>

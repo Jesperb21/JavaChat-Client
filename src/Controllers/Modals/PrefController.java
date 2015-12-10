@@ -15,6 +15,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Created by JesperB on 08-12-2015.
@@ -24,18 +27,23 @@ public class PrefController implements Initializable{
     public TextField txtPort;
 
     public int Port = 0;
+    public String FilePath = System.getProperty("user.dir");
 
-
+    /*
+     * Get the prefcontroller
+     */
     public PrefController() {
         ControllerMediator.getInstance().prefController = this;
     }
 
+    /*
+     * Get and set the port, if there isn
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getPortFromXml();
         txtPort.setText(String.valueOf(Port));
     }
-
 
     //todo move this to a menubar controller
     /**
@@ -83,4 +91,25 @@ public class PrefController implements Initializable{
         }
     }
 
+
+    public void SaveLog() {
+        Logger logger = Logger.getLogger("MyLog");
+        FileHandler fh;
+
+        try {
+            // This block configure the logger with handler and formatter
+            fh = new FileHandler(FilePath + "\\logs\\Chat_" + System.currentTimeMillis() + ".log");
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+            // the following statement is used to log any messages
+            logger.info(ControllerMediator.getInstance().chatController.ChatTextArea.getText());
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
