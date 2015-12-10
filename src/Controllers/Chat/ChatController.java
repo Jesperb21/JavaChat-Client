@@ -1,17 +1,13 @@
 package Controllers.Chat;
 
 import Controllers.ControllerMediator;
-import Models.Chat.Packages.MessagePackage;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.sql.Date;
-import java.time.Instant;
 import java.util.ResourceBundle;
-import java.util.StringJoiner;
 
 /**
  * Created by JesperB on 09-12-2015.
@@ -38,7 +34,7 @@ public class ChatController implements Initializable{
     }
     private void SendMsgEventHandler(){
         ControllerMediator mediator = ControllerMediator.getInstance();
-        mediator.SSS.SendMsg(ChatMessageArea.getText());
+        mediator.CSS.SendMsg("Client",ChatMessageArea.getText());
         ChatMessageArea.clear();
     }
 }

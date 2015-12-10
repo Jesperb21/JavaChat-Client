@@ -4,9 +4,8 @@ import Controllers.Chat.ChatChannelController;
 import Controllers.Chat.ChatController;
 import Controllers.Chat.ChatPanelController;
 import Controllers.Modals.PrefController;
-import Services.ServerSocketService;
+import Services.ClientSocketService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -31,5 +30,5 @@ public class ControllerMediator {
     public HashMap<String, ChatChannelController> channels = new HashMap<>();
 
     //services
-    public ServerSocketService SSS;
-}
+    public ClientSocketService CSS;
+    }

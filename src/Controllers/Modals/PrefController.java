@@ -1,6 +1,8 @@
 package Controllers.Modals;
 
 import Controllers.ControllerMediator;
+import Models.Chat.Packages.LoginPackage;
+import Services.ClientSocketService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,8 +22,8 @@ public class PrefController{
     public TextField txtPort;
     public TextField txtIPAddress;
 
-    public int Port = 34000;
-    public String IPAddress = "172.16.245.27";
+    public int Port = 33000;
+    public String IPAddress = "192.168.1.10";
 
     /**
      * Get properties of the prefcontroller
@@ -66,15 +68,13 @@ public class PrefController{
 
         try {
             Socket Client = new Socket(IPAddress, Port);
-            OutputStream outToServer = Client.getOutputStream();
+            ClientSocketService css = new ClientSocketService(Client);
+            css.TransferPckg(new LoginPackage("Hello", "Default0"));
 
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF("Hello from" + Client.getLocalSocketAddress());
+//            InputStream inFromServer = Client.getInputStream();
+//            DataInputStream in = new DataInputStream(inFromServer);
 
-            InputStream inFromServer = Client.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-
-            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(in.readUTF() + "\n");
+//            ControllerMediator.getInstance().chatController.ChatTextArea.appendText(in.readUTF() + "\n");
 
         } catch (IOException e) {
             System.out.println("Connection timed out..");
